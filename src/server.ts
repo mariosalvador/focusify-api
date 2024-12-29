@@ -1,6 +1,9 @@
 import fastify from "fastify";
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
 
+//Auth Routes
+import { Login } from "./routes/auth/login";
+
 //User Routes
 import { CreateUser } from "./routes/User/createUser";
 
@@ -16,6 +19,9 @@ const server = fastify({
 
 server.setValidatorCompiler(validatorCompiler);
 server.setSerializerCompiler(serializerCompiler);
+
+//Auth routes
+server.register(Login);
 
 // User routes
 server.register(CreateUser);
