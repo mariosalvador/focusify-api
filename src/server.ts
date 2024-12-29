@@ -6,6 +6,8 @@ import { CreateUser } from "./routes/User/createUser";
 
 //Goals Routes
 import { CreateGoals } from "./routes/Goal/createGoals";
+import { GoalsByUserId } from "./routes/Goal/getGoalsByUserId";
+
 
 
 const server = fastify({
@@ -20,8 +22,9 @@ server.register(CreateUser);
 
 // Goals routes
 server.register(CreateGoals);
+server.register(GoalsByUserId);
 
-server.listen({ port: 2006 }, (err, address) => {
+server.listen({ port: 3500 }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
