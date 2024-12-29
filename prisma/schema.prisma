@@ -8,14 +8,16 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(cuid())
-  name      String
-  email     String     @unique
-  avatarUrl String? // Para armazenar a URL do avatar
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  goals     Goal[]
-  feedbacks Feedback[]
+  id           String     @id @default(cuid())
+  name         String
+  email        String     @unique
+  phone_number String?    @unique
+  password     String
+  avatarUrl    String? // Para armazenar a URL do avatar
+  goals        Goal[]
+  feedbacks    Feedback[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
 model Goal {
@@ -23,7 +25,7 @@ model Goal {
   title     String
   startDate DateTime
   endDate   DateTime
-  status    GoalStatus @default(PENDING) // Adicionando status da meta
+  status    Status @default(PENDING) // Adicionando status da meta
   userId    String
   user      User       @relation(fields: [userId], references: [id])
   subTasks  SubTask[]
@@ -31,10 +33,11 @@ model Goal {
   updatedAt DateTime   @updatedAt
 }
 
-enum GoalStatus {
+enum Status {
   PENDING // Meta pendente
   COMPLETED // Meta concluída
   CANCELED // Meta cancelada (opcional)
+	@@map("GoalStatus")
 }
 
 model SubTask {
@@ -42,6 +45,7 @@ model SubTask {
   title     String
   startDate DateTime
   endDate   DateTime
+  status    Status @default(PENDING) // Adicionando status da subtarefa
   goalId    String
   goal      Goal     @relation(fields: [goalId], references: [id])
   createdAt DateTime @default(now())
