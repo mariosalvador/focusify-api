@@ -7,6 +7,7 @@ import { Login } from "./routes/auth/login";
 
 //User Routes
 import { CreateUser } from "./routes/User/createUser";
+import { GetUser } from "./routes/User/getUser";
 
 //Goals Routes
 import { CreateGoals } from "./routes/Goal/createGoals";
@@ -35,6 +36,7 @@ server.register(Login);
 
 // User routes
 server.register(CreateUser);
+server.register(GetUser);
 
 // Goals routes
 server.register(CreateGoals);

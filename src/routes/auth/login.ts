@@ -36,6 +36,8 @@ export const Login = async (app: FastifyInstance) => {
         return;
       }
 
+      const { password: _, ...userWithoutPassword } = user;
+
       const token = await generateToken({
         id_user: user.id,
         email: user.email,
@@ -43,7 +45,7 @@ export const Login = async (app: FastifyInstance) => {
 
       return reply.send({
         message: "Login successful",
-        user: { id: user.id, email: user.email },
+        user: userWithoutPassword,
         token,
       });
     }
