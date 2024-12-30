@@ -11,6 +11,9 @@ import { CreateUser } from "./routes/User/createUser";
 import { CreateGoals } from "./routes/Goal/createGoals";
 import { GoalsByUserId } from "./routes/Goal/getGoalsByUserId";
 
+//SubTask Routes
+import { CreateSubTask } from "./routes/SubTask/createSubTask";
+
 
 
 const server = fastify({
@@ -29,6 +32,9 @@ server.register(CreateUser);
 // Goals routes
 server.register(CreateGoals);
 server.register(GoalsByUserId);
+
+//SubTasks  routes
+server.register(CreateSubTask);
 
 server.listen({ port: 3500 }, (err, address) => {
   if (err) {
