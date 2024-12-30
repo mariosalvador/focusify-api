@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
+import fastifyCors from "@fastify/cors";
 
 //Auth Routes
 import { Login } from "./routes/auth/login";
@@ -16,12 +17,18 @@ import { CreateSubTask } from "./routes/SubTask/createSubTask";
 
 
 
+const port = Number(process.env.PORT) || 3500;
 const server = fastify({
   logger: true,
 });
 
+
 server.setValidatorCompiler(validatorCompiler);
 server.setSerializerCompiler(serializerCompiler);
+
+server.register(fastifyCors, {
+  origin: "*",
+});
 
 //Auth routes
 server.register(Login);
@@ -36,7 +43,7 @@ server.register(GoalsByUserId);
 //SubTasks  routes
 server.register(CreateSubTask);
 
-server.listen({ port: 3500 }, (err, address) => {
+server.listen({ port: port }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
