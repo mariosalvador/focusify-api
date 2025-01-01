@@ -7,7 +7,7 @@ export const CreateGoals = async (app: FastifyInstance) => {
   app.withTypeProvider<ZodTypeProvider>().post("/goal/create", {
     schema: {
       body: z.object({
-        title: z.string().min(10, { message: "Title must be at least 10 characters long" }),
+        title: z.string().min(5, { message: "Title must be at least 5 characters long" }),
         startDate: z.string().refine((val) => !isNaN(Date.parse(val)), {
           message: "Invalid date format",
         }).transform((val) => new Date(val)),
@@ -17,7 +17,7 @@ export const CreateGoals = async (app: FastifyInstance) => {
         status: z.enum(["PENDING", "COMPLETED", "CANCELED"]),
         userId: z.string().cuid(),
         subTasks: z.array(z.object({
-          title: z.string().min(10, { message: "Title must be at least 10 characters long" }),
+          title: z.string().min(5, { message: "Title must be at least 5 characters long" }),
           startDate: z.string().refine((val) => !isNaN(Date.parse(val)), {
             message: "Invalid date format",
           }).transform((val) => new Date(val)),

@@ -9,7 +9,7 @@ export const CreateUser = async (app: FastifyInstance) => {
   app.withTypeProvider<ZodTypeProvider>().post("/user/create", {
     schema: {
       body: z.object({
-        name: z.string().min(8, { message: "Name must be at least 10 characters long" }),
+        name: z.string().min(8, { message: "Name must be at least 8 characters long" }),
         email: z.string().email(),
         password: z.string().min(6, { message: "Password must be at least 6 characters long" }),
         phone_number: z.string(),
