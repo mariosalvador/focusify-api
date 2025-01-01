@@ -14,7 +14,7 @@ export const GoalsByUserId = async (app: FastifyInstance) => {
   }, async (request, reply) => {
     const { userId } = request.params;
 
-    const goals = await prisma.goal.findFirst({
+    const goals = await prisma.goal.findMany({
       where: {
         userId,
       },
