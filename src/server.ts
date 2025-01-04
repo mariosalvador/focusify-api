@@ -16,6 +16,11 @@ import { GoalsByUserId } from "./routes/Goal/getGoalsByUserId";
 //SubTask Routes
 import { CreateSubTask } from "./routes/SubTask/createSubTask";
 
+//Feedback Routes
+import { createFeedback } from "./routes/Feedback/createFeedback";
+import { GetAllFeedbacks } from "./routes/Feedback/getAllFeedbacks";
+import { DeleteAllFeedbacks } from "./routes/Feedback/deleteAll-feedbacks";
+
 
 
 const port = Number(process.env.PORT) || 3500;
@@ -44,6 +49,11 @@ server.register(GoalsByUserId);
 
 //SubTasks  routes
 server.register(CreateSubTask);
+
+//Feedback routes
+server.register(createFeedback);
+server.register(GetAllFeedbacks);
+server.register(DeleteAllFeedbacks);
 
 server.listen({ port: port , host: "0.0.0.0"}, (err, address) => {
   if (err) {
